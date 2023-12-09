@@ -1,19 +1,30 @@
 /**
  * task1.js
  *
- * Виджет для показа дерева принимает данные в виде массива с вложенными объектами 
+ * Виджет для показа дерева принимает данные в виде массива с вложенными объектами
+ * Число уровней вложенности не ограничено
+ *
  * Папка представлена узлом с массивом children
  *       {id, title, children:[..]}
- * 
+ *
  * Элементы массива children - папки или конечные узлы
  *       children:{id, title, children:[{id, title, type},.. {id, title, children:[]}]}
- * 
+ *
  * Конечный узел (лист) не имеет массива children, но имеет атрибут type
  *       {id, title, type}
  *
  * Напишите функцию processTree, которая должна оставить в дереве только устройства заданного типа
  * Все пустые папки тоже нужно удалить
+ * 
+ * Можно создать отдельный модуль или разместить решение в этом же файле
+ * Для тестирования выполните:
+ * node task1
+ * 
+ * При желании добавьте свои тесты
  */
+
+const util = require('util');
+const assert = require('assert');
 
 /**
  * Возвращает дерево, содержащее только узлы с заданными типами
@@ -25,12 +36,12 @@
  * @return {Array of Objects}
  */
 function processTree(treeArr, selectedTypes) {
-  // Напишите здесь ваш код
-  // 
+  // Здесь напишите ваш код
+  
 }
 
-// Пример
-const result = processTree(tree_data1, ['TEMP', 'VENT']);
+//--------------------------------------------------------------
+// Тестирование
 
 // Входные данные
 const tree_data1 = [
@@ -81,7 +92,7 @@ const tree_data1 = [
 ];
 
 // Ожидаемый результат
-const expected = [
+const expect = [
   {
     id: 'n1',
     title: 'Вентиляция',
@@ -104,3 +115,11 @@ const expected = [
     ]
   }
 ];
+
+try {
+  const result = processTree(tree_data1, ['TEMP', 'VENT']);
+  assert.deepEqual(result, expect);
+  console.log('OK');
+} catch (e) {
+  console.log('ERROR: ' + util.inspect(e));
+}
